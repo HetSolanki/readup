@@ -1,4 +1,4 @@
-import { eq } from "drizzle-orm";
+import { and, eq } from "drizzle-orm";
 import { db } from "..";
 import { feedFollows, feeds, users } from "../schema";
 
@@ -21,18 +21,25 @@ export async function createFeedFollow(userId: string, feedId: string) {
     .values({ userId, feedId })
     .returning();
 
-  const newJoinedFeed = await db
+  const [newJoinedFeed] = await db
     .select({
       id: feedFollows.id,
       createdAt: feedFollows.createdAt,
       updatedAt: feedFollows.updatedAt,
+      userId: users.id,
+      feedId: feeds.id,
       feedName: feeds.name,
       users: users.name,
     })
     .from(feedFollows)
     .innerJoin(users, eq(feedFollows.userId, users.id))
     .innerJoin(feeds, eq(feedFollows.feedId, feeds.id))
-    .where(eq(feedFollows.id, newfeedFollow.id));
+    .where(
+      and(
+        eq(feedFollows.id, newfeedFollow.id),
+        eq(users.id, newfeedFollow.userId)
+      )
+    );
 
   return newJoinedFeed;
 }
@@ -45,13 +52,18 @@ export async function getFeedByURL(url: string) {
 export async function getFeedFollowsForUser(userId: string) {
   const result = await db
     .select({
-      feedName: feeds.name,
-      userName: users.name,
+      id: feedFollows.id,
+      createdAt: feedFollows.createdAt,
+      updatedAT: feedFollows.updatedAt,
+      userId: feedFollows.userId,
+      feedId: feedFollows.feedId,
+      feedname: feeds.name,
     })
     .from(feedFollows)
     .innerJoin(users, eq(feedFollows.userId, users.id))
     .innerJoin(feeds, eq(feedFollows.feedId, feeds.id))
-    .where(eq(users.id, userId));
+    .where(eq(feedFollows.userId, userId));
 
   return result;
 }
+
