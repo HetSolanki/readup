@@ -14,6 +14,7 @@ import {
 } from "./commands/feed";
 import { middlewareLoggedIn } from "./commands/middleware";
 import { handlerFeedUnfollow } from "./commands/feed_unfollow";
+import { handlerBrowse } from "./commands/browse";
 
 async function main() {
   const args = process.argv.slice(2);
@@ -48,6 +49,7 @@ async function main() {
     "unfollow",
     middlewareLoggedIn(handlerFeedUnfollow)
   );
+  registerCommand(commandRegistry, "browse", middlewareLoggedIn(handlerBrowse));
 
   try {
     await runCommand(commandRegistry, cmdName, ...cmdArgs);
