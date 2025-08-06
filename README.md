@@ -156,4 +156,4 @@ npm run start unfollow https://techcrunch.com/feed/
 
 ## 📝 License
 
-MIT License © 2025 Your Het Solanki
+MIT License © 2025 Het Solanki
