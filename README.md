@@ -1,6 +1,6 @@
-# 🐊 Gator CLI
+# 🐊 Readup CLI
 
-**gator** is a simple command-line RSS feed tool that lets you register users, follow/unfollow feeds, and browse the latest posts — all without leaving your terminal.
+**Readup** is a simple command-line RSS feed tool that lets you register users, follow/unfollow feeds, and browse the latest posts — all without leaving your terminal.
 
 ---
 
