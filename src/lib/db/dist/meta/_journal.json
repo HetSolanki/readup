@@ -29,6 +29,20 @@
       "when": 1754410423208,
       "tag": "0003_high_komodo",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1754477707143,
+      "tag": "0004_sour_squadron_supreme",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1754480317134,
+      "tag": "0005_strange_lockheed",
+      "breakpoints": true
     }
   ]
 }
